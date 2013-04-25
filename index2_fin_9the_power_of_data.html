@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+   	<title>D3 Test 2</title>
+   	<style type="text/css">
+		div.bar 
+		{
+		    display: inline-block;
+		    width: 20px;
+		    height: 75px;   /* We'll override this later */
+		    background-color: teal;
+		}
+	</style>
+	<script type="text/javascript" src="d3/d3.v3.js"></script>
+    </head>
+    <body>
+	
+<!-------------- 9. The power of data -------------->
+    <script type="text/javascript">
+	var dataset = [12, 100, 8, 7, 15, 47, 25, 30, 19, 8, 7, 5, 44]
+	
+	//"creating" and saving a selection of data
+	var selection1 =
+	d3	.select("body")
+		.selectAll("NULL")
+		.data(dataset)
+	;
+	
+	//actually creating divs for the data and binding them to it
+	selection1
+		.enter()
+		.append("div")
+		.transition()
+		.duration(2000)
+		.attr("class", "bar") //<=> .classed("bar", true)
+		.style("height", function(d,i) 	{
+											return(d+"px");
+										})
+	;
+	
+	//changing height from data value to data number
+	d3	.select("body")
+		.selectAll("div")
+		.transition()
+		.duration(3000)
+		.delay(2000)
+		.style("height", function(d,i) 	{
+											return((i+1)*10+"px");
+										})
+	;
+	
+	//creating array of random values [0-100]
+	var dataset2 = [];
+	for(var i = 0; i < 17; i++)
+	{
+		dataset2.push(Math.random() * 100);
+	}
+	
+	//new line
+	d3	.select("body")
+		.append("br")
+	;	
+
+	//creating new divs (for visual comparison) and binding with dataset2
+	d3	.select("body")
+		.selectAll("NULL")
+		.data(dataset2)
+		.enter()
+		.append("div")
+		.transition()
+		.duration(0)
+		.delay(2000+3000)
+		.attr("class", "bar") //<=> .classed("bar", true)
+		.style("background-color", "red")
+		.style("height", function(d,i) 	{
+											return(d+"px");
+										})
+	;
+	
+	//re-binding old divs to dataset2
+	selection1
+		.data(dataset2)		//rebinding divs to new data
+		.transition()
+		.duration(2500)
+		.delay(2000+3000)
+		.style("height", function(d,i)	{ //changing height (separate operation to binding)
+											return(d+"px");
+										})
+	;
+	
+	//adding margin for ALL divs
+	d3	.select("body")
+		.selectAll("div")
+		.transition()
+		.duration(1500)
+		.delay(2000+3000+2500)
+		.style("margin-right", "2px")
+		.style("margin-left", "2px")
+	;	
+
+	</script>
+	
+    </body>
+</html>     

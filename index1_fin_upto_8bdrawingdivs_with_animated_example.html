@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+   	<title>D3 Test</title>
+   	<style type="text/css">
+		div.bar 
+		{
+		    display: inline-block;
+		    width: 20px;
+		    height: 75px;   /* We'll override this later */
+		    background-color: teal;
+		}
+	</style>
+	<script type="text/javascript" src="d3/d3.v3.js"></script>
+    </head>
+    <body>
+	
+
+<!-------------- 7. Using Data -------------->
+<!-------------- red and black paragraphs -------------->
+       <script type="text/javascript">
+	var dataset = [5, 10, 15, 20, 25];
+	d3.select("body")
+		.selectAll("p")
+		.data(dataset) //counts data
+		.enter()
+		.append("p")
+		.text(function(d) { return "hi there " + d; })
+		.style("color", function(d) {
+			if(d>15) return ("red")
+			else return "black"});
+	</script>
+<!-------------- 8. Drawing Divs -------------->
+<!-------------- manual div -------------->
+	<div style="	display: inline-block;
+            		width: 20px;
+            		height: 75px;
+			background-color: teal; ">
+		<p>HI</p>
+	</div>
+<!-------------- css class div -------------->
+	<div class="bar">
+		ss
+	</div>
+	<br/>
+<!-------------- more manual divs -------------->
+	<div style="	display: inline-block;
+			width: 30px;
+			height: 20px;
+			background-color: red; 
+			align: bottom;">
+		R
+	</div>
+	<div style=" 	display: inline-block;
+			width: 30px;
+			height: 20px;
+			background-color: orange;">
+		O
+	</div>
+	<div style="	display: inline-block;
+			width: 30px;
+			height: 30px;
+			background-color: yellow;">
+		Y
+	</div>
+	<div style="	display: inline-block;
+			width: 30px;
+			height: 40px;
+			background-color: green;">
+		G
+	</div>
+	<div style="	display: inline-block;
+			width: 30px;
+			height: 50px;
+			background-color: aqua;">
+		LB
+	</div>
+	<div style=" 	display: inline-block;
+			width: 30px;
+			height: 60px;
+			background-color: blue;">
+		B
+	</div>
+	<div style=" 	display: inline-block;
+			width: 30px;
+			height: 70px;
+			background-color: purple;">
+		P
+	</div>
+	<br/>
+<!-------------- d3 div generation -------------->
+	<script type="text/javascript">
+	var dataset = [5, 10, 15, 20, 25];
+	d3.select("body")
+		.selectAll("null") //because we want to draw absolutely new objects
+		.data(dataset)
+		.enter()
+		.append("div")
+		.attr("class","bar")
+		.style("height", function(d) {return(d*5 + "px")})
+	</script>
+	<br/>
+<!-------------- d3 generation rainbow -------------->
+	<script type="text/javascript">
+	var dataset2 = [1, 2, 3, 4, 5, 6, 7];
+	var selection  = d3.select("body")
+		.selectAll("null")
+		.data(dataset2)
+		.enter()
+		.append("div")//enter is almost always followed by append()
+		.transition()
+		.duration(3000)
+		.attr("class","bar")
+		.style("height", function(d) {return(d*25 + "px")})
+	
+	selection
+		.transition()
+		.duration(3000)
+		.delay(4000)
+		.style("background-color","red")
+		.style("height", function(d) {return(100/d + 20 + "px")})
+		.style("width", function(d,i) {return(i*2+18 + "px")});
+
+	selection
+		.transition()
+		.duration(1000)
+		.delay(7000)
+		.style("background-color","blue")
+		.style("margin-right", "2px");
+	
+	
+	</script>
+
+	
+
+
+
+	<script type="text/javascript">d3.select("body").append("p").text("New paragraph!");</script>
+
+    </body>
+</html>     
