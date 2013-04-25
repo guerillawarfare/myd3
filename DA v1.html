@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+		<title>Project DA Brisbane</title>
+		<style type="text/css">
+			.pumpkin
+			{
+				fill: brown;
+				opacity: 0.2;
+				stroke: green; 
+				stroke-width: 5;
+			}
+			
+		</style>
+		<script type="text/javascript" src="d3/d3.v3.js"></script>
+    </head>
+    <body>
+	
+<!-------------- 10. An SVG primer -------------->
+    <script type="text/javascript">
+	
+	//width and height parameters
+	var	w=1200;
+	var h=600;
+	
+	//create svg element (the whiteboard)
+	var svg =
+	d3	.select("body")
+		.append("svg")
+	;
+	
+	svg	.attr("width", w)
+		.attr("height",h)
+	;
+	
+	//		  0, 1,  2,  3,  4,  5,  6,  7,  8,  9,  10,  11,  12
+	var XL = [0,100,200,300,400,500,600,700,800,900,1000,1100,1200];
+	var YL = [0,100,200,300,400,500,600];
+	
+	//compute lines
+	var Lines = [
+					//vertical
+					 [XL[1],YL[1],		XL[1],YL[3]]
+					,[XL[2],YL[2]+50,	XL[2],YL[5]]
+					,[XL[3],YL[1]+50,	XL[3],YL[4]]
+					,[XL[3]+50,YL[4],	XL[3]+50,YL[5]]
+					,[XL[4],YL[2],		XL[4],YL[4]]
+					,[XL[4]+50,YL[4],	XL[4]+50,YL[5]]
+					,[XL[5],YL[1],		XL[5],YL[2]]
+					,[XL[5],YL[2]+50,	XL[5],YL[4]]
+					,[XL[6],YL[1]+50,	XL[6],YL[4]]
+					,[XL[7],YL[1],		XL[7],YL[4]]
+					,[XL[8],YL[1],		XL[8],YL[1]+50]
+					,[XL[9],YL[1],		XL[9],YL[5]]
+					,[XL[10],YL[1]+50,	XL[10],YL[4]]
+					,[XL[10]+50,YL[4],	XL[10]+50,YL[5]]
+					,[XL[11],YL[1]+25,		XL[11],YL[3]]
+					
+					//horizontal
+					,[XL[1],YL[1],		XL[9],YL[1]]
+					,[XL[2],YL[2]+50,	XL[3],YL[2]+50]
+					,[XL[2]+50,YL[4],	XL[3]+50,YL[4]]
+					,[XL[3],YL[1]+50,	XL[6],YL[1]+50]
+					,[XL[4],YL[2],		XL[5],YL[2]]
+					,[XL[4],YL[4],		XL[4]+50,YL[4]]
+					,[XL[5],YL[2]+50,	XL[6],YL[2]+50]
+					,[XL[9],YL[1]+50,	XL[10],YL[1]+50]
+					,[XL[8]+50,YL[4],	XL[9],YL[4]]
+					,[XL[9],YL[1]+25,	XL[11],YL[1]+25]
+					,[XL[9]+50,YL[4],	XL[10]+50,YL[4]]					
+				]
+	;
+	
+	//draw lines
+	for(var i=0; i<Lines.length; i++)
+	{
+		svg	.append("line")
+			.transition()
+			.duration(500)	
+			.delay(100*i)
+			.attr("x1",Lines[i][0])
+			.attr("y1",Lines[i][1])
+			.attr("x2",Lines[i][2])
+			.attr("y2",Lines[i][3]) 
+			.attr("stroke","black") 
+			.attr("stroke-width",2)
+		;
+	}
+	
+	</script>
+	
+	</body>
+</html> 
